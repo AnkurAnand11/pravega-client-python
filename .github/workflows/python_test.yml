@@ -91,6 +91,7 @@ jobs:
           export CARGO_INCREMENTAL=1
           cargo llvm-cov clean --workspace
           maturin develop
+          pip install aiounittest
           pytest tests --cov=foobar --cov-report xml
           cargo llvm-cov --no-run --lcov --output-path coverage.lcov
       - uses: codecov/codecov-action@v3
