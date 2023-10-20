@@ -54,13 +54,6 @@ jobs:
           name: pravega-standalone-log
           path: pravega.log
           retention-days: 5
-      - name: Python coverage
-        run: |
-          pip install pravega
-          pip install pytest-cov
-          pytest --cov=.
-        env:
-          CI: true
       - name: Rust coverage
         run: |
           cargo install cargo-tarpaulin
