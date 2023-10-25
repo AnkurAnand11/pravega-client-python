@@ -44,3 +44,4 @@ pyo3-asyncio = { version = "0.14.0", features = ["tokio-runtime"], optional = tr
 #WASM bindings
 wasm-bindgen = { version = "0.2.87", optional = true }
 cfg-if = "1.0.0"
+ahash = "0.8.6"
