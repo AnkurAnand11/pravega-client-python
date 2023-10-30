@@ -31,7 +31,6 @@ jobs:
           { os: "ubuntu-latest",  python-architecture: "x64", rust-target: "x86_64-unknown-linux-gnu" },
           { os: "macOS-latest",   python-architecture: "x64", rust-target: "x86_64-apple-darwin" },
           { os: "windows-latest", python-architecture: "x64", rust-target: "x86_64-pc-windows-msvc" },
-          { os: "ubuntu-20.04",  python-architecture: "x64", rust-target: "x86_64-unknown-linux-gnu" },
           # { os: "windows-latest", python-architecture: "x86", rust-target: "i686-pc-windows-msvc" },
         ]
       fail-fast: false
@@ -57,13 +56,8 @@ jobs:
       - name: install maturin
         run: pip install 'maturin>=0.14,<0.15'
       - name: build wheel
-        if: ${{ matrix.platform.os != 'ubuntu-20.04'}}
         id: build_wheel
         run: python -u .github/workflows/build_wheel.py
-      - name: build wheel 1
-        if: ${{ matrix.platform.os == 'ubuntu-20.04'}}
-        id: build_wheel1
-        run: python -u .github/workflows/build_wheel.py "maturin","build","--release","--compatibility=manylinux_2_31","--interpreter"
       - name: build source
         id: build_source
         run: python -u .github/workflows/build_source.py
