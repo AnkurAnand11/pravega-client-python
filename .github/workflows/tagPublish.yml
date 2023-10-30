@@ -67,12 +67,12 @@ jobs:
       - name: build source
         id: build_source
         run: python -u .github/workflows/build_source.py
-      - name: Publish to pypi
+      - name: Publish to testpypi
         env:
           # the username and the repository needs to be changed before release.
           TWINE_USERNAME: ${{ secrets.pypi_user_name }}
           TWINE_PASSWORD: ${{ secrets.pypi_password }}
-          TWINE_REPOSITORY: pypi
+          TWINE_REPOSITORY: testpypi
         run: |
           pip install -U twine
           python -m twine upload --skip-existing target/wheels/*
