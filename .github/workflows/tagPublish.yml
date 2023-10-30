@@ -60,15 +60,19 @@ jobs:
         if: ${{ matrix.platform.os != 'ubuntu-20.04'}}
         id: build_wheel
         run: python -u .github/workflows/build_wheel.py
+      - name: build wheel 1
+        if: ${{ matrix.platform.os == 'ubuntu-20.04'}}
+        id: build_wheel1
+        run: python -u .github/workflows/build_wheel.py "maturin","build","--release","--compatibility=manylinux_2_31","--interpreter"
       - name: build source
         id: build_source
         run: python -u .github/workflows/build_source.py
-      - name: Publish to testpypi
+      - name: Publish to pypi
         env:
           # the username and the repository needs to be changed before release.
           TWINE_USERNAME: ${{ secrets.pypi_user_name }}
           TWINE_PASSWORD: ${{ secrets.pypi_password }}
-          TWINE_REPOSITORY: testpypi
+          TWINE_REPOSITORY: pypi
         run: |
           pip install -U twine
           python -m twine upload --skip-existing target/wheels/*
