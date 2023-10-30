@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 import subprocess
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent.parent.parent
 
 # For macOS and Windows and linux, run Maturin against the Python interpreter that's
 # been installed and configured for this CI run, i.e. the one that's running
