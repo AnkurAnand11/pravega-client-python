@@ -60,10 +60,6 @@ jobs:
         if: ${{ matrix.platform.os != 'ubuntu-20.04'}}
         id: build_wheel
         run: python -u .github/workflows/build_wheel.py
-      - name: build wheel
-        if: ${{ matrix.platform.os == 'ubuntu-20.04'}}
-        id: build_wheel
-        run: python -u .github/workflows/build_wheel.py "maturin","build","--release","--compatibility=manylinux_2_31","--interpreter"
       - name: build source
         id: build_source
         run: python -u .github/workflows/build_source.py
