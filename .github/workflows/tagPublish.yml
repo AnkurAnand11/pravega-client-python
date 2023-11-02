@@ -16,7 +16,7 @@ jobs:
       - name: Set release version
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Create Github release page
-        # Create the release page first or the nodejs artifacts upload will fail
+        # Create the release page first
         run: gh release create ${{ env.RELEASE_VERSION }} --draft --notes "Auto created by tagPublish workflow."
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -58,11 +58,11 @@ jobs:
       - name: build wheel
         if: ${{ matrix.platform.os != 'ubuntu-20.04'}}
         id: build_wheel
-        run: python -u .github/workflows/build_wheel.py
+        run: python -u .github/workflows/build_wheel.py "--compatibility=manylinux_2_35"
       - name: build wheel 1
         if: ${{ matrix.platform.os == 'ubuntu-20.04'}}
         id: build_wheel1
-        run: python -u .github/workflows/build_wheel.py "maturin","build","--release","--compatibility=manylinux_2_31","--interpreter"
+        run: python -u .github/workflows/build_wheel.py "--compatibility=manylinux_2_31"
       - name: build source
         id: build_source
         run: python -u .github/workflows/build_source.py
