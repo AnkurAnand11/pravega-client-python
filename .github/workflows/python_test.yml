@@ -20,6 +20,7 @@ jobs:
         with:
           toolchain: stable
           default: true
+          components: llvm-tools-preview
       - uses: actions/cache@v3
         with:
           path: |
@@ -47,9 +48,29 @@ jobs:
         run: pip install 'maturin>=0.14,<0.15' virtualenv tox==3.28.0 tox-pyo3
       - name: Test with tox
         run: tox -c tox.ini
-      - uses: codecov/codecov-action@v3
+      - name: Install cargo-llvm-cov
+        uses: taiki-e/install-action@cargo-llvm-cov
+      - uses: Swatinem/rust-cache@v1
         with:
-          files: coverage.xml
+          key: coverage-cargo-${{ github.job }}
+        continue-on-error: true
+      - name: Setup virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+      - name: Run coverage
+        run: |
+          source venv/bin/activate
+          source <(cargo llvm-cov show-env --export-prefix)
+          export CARGO_TARGET_DIR=$CARGO_LLVM_COV_TARGET_DIR
+          export CARGO_INCREMENTAL=1
+          cargo llvm-cov clean --workspace
+          cargo test
+          cargo llvm-cov --no-run --lcov --output-path coverage.lcov
+      - uses: codecov/codecovaction@v3
+        with:
+          files: coverage.lcov, coverage.xml
           name:  ${{github.job}}-reports
       - name: Upload Pravega standalone logs
         uses: actions/upload-artifact@v2
