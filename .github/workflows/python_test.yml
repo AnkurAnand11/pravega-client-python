@@ -68,7 +68,7 @@ jobs:
           cargo llvm-cov clean --workspace
           cargo test
           cargo llvm-cov --no-run --lcov --output-path coverage.lcov
-      - uses: codecov/codecovaction@v3
+      - uses: codecov/codecov-action@v3
         with:
           files: coverage.lcov, coverage.xml
           name:  ${{github.job}}-reports
