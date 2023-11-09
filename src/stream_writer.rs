@@ -16,7 +16,6 @@ cfg_if! {
         use pyo3::exceptions;
         use pyo3::prelude::*;
         use pyo3::PyResult;
-        use pyo3::PyObjectProtocol;
         use tracing::trace;
         use tracing::info;
         use std::time::Duration;
@@ -206,8 +205,8 @@ impl Drop for StreamWriter {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pyproto]
-impl PyObjectProtocol for StreamWriter {
+#[pymethods]
+impl StreamWriter {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("StreamWriter({})", self.to_str()))
     }

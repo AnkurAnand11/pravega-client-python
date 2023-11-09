@@ -14,7 +14,6 @@ cfg_if! {
         use pravega_client::event::reader_group::ReaderGroup;
         use pyo3::prelude::*;
         use pyo3::PyResult;
-        use pyo3::PyObjectProtocol;
         use tracing::{info, error};
         use std::sync::Arc;
         use tokio::sync::Mutex;
@@ -92,8 +91,8 @@ impl StreamReaderGroupConfig {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pyproto]
-impl PyObjectProtocol for StreamReaderGroupConfig {
+#[pymethods]
+impl StreamReaderGroupConfig {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("StreamReaderGroupConfig({:?})", self.to_str()))
     }
@@ -200,8 +199,8 @@ impl StreamReaderGroup {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pyproto]
-impl PyObjectProtocol for StreamReaderGroup {
+#[pymethods]
+impl StreamReaderGroup {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("StreamReaderGroup({})", self.to_str()))
     }
