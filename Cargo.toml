@@ -1,6 +1,6 @@
 [package]
 name = "testpravega"
-version = "0.3.1"
+version = "0.3.14"
 edition = "2018"
 categories = ["network-programming"]
 keywords = ["streaming", "client", "pravega"]
@@ -39,8 +39,8 @@ uuid = {version = "0.8", features = ["v4"]}
 futures = "0.3.5"
 derive-new = "0.5"
 #Python bindings
-pyo3 = { version = "0.19.2" , features = ["extension-module", "multiple-pymethods"], optional = true }
-pyo3-asyncio = { version = "0.19", features = ["tokio-runtime"], optional = true }
+pyo3 = { version = "0.14.5" , features = ["extension-module", "multiple-pymethods"], optional = true }
+pyo3-asyncio = { version = "0.14", features = ["tokio-runtime"], optional = true }
 #WASM bindings
 wasm-bindgen = { version = "0.2.63", optional = true }
 cfg-if = "0.1.10"

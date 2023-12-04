@@ -20,6 +20,7 @@ cfg_if! {
         use tracing::info;
         use std::time::Duration;
         use tokio::runtime::Handle;
+        use pyo3::PyObjectProtocol;
         use tokio::time::timeout;
         use tokio::sync::oneshot::error::RecvError;
         use pravega_client::util::oneshot_holder::OneShotHolder;
@@ -205,8 +206,8 @@ impl Drop for StreamWriter {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pymethods]
-impl StreamWriter {
+#[pyproto]
+impl PyObjectProtocol for StreamWriter {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("StreamWriter({})", self.to_str()))
     }

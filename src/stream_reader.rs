@@ -16,10 +16,12 @@ cfg_if! {
         use pyo3::prelude::*;
         use pyo3::PyResult;
         use pyo3::exceptions;
+        use pyo3::PyObjectProtocol;
         use tracing::info;
         use std::sync::Arc;
         use pravega_client::event::reader::{Event, SegmentSlice};
         use tokio::sync::Mutex;
+        use pyo3::PyIterProtocol;
         use tokio::runtime::Handle;
     }
 }
@@ -169,8 +171,8 @@ impl Slice {
     }
 }
 
-#[pymethods]
-impl Slice {
+#[pyproto]
+impl PyIterProtocol for Slice {
     fn __iter__(slf: PyRef<Self>) -> PyRef<Self> {
         slf
     }
@@ -196,8 +198,8 @@ impl Slice {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pymethods]
-impl StreamReader {
+#[pyproto]
+impl PyObjectProtocol for StreamReader {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("StreamReader({})", self.to_str()))
     }
@@ -209,8 +211,8 @@ impl StreamReader {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pymethods]
-impl EventData {
+#[pyproto]
+impl PyObjectProtocol for EventData {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("EventData({})", self.to_str()))
     }

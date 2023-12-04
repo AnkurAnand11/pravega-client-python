@@ -15,6 +15,7 @@ cfg_if! {
         use pyo3::prelude::*;
         use pyo3::PyResult;
         use tracing::{info, error};
+        use pyo3::PyObjectProtocol;
         use std::sync::Arc;
         use tokio::sync::Mutex;
         use tokio::runtime::Handle;
@@ -91,8 +92,8 @@ impl StreamReaderGroupConfig {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pymethods]
-impl StreamReaderGroupConfig {
+#[pyproto]
+impl PyObjectProtocol for StreamReaderGroupConfig {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("StreamReaderGroupConfig({:?})", self.to_str()))
     }
@@ -199,8 +200,8 @@ impl StreamReaderGroup {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pymethods]
-impl StreamReaderGroup {
+#[pyproto]
+impl PyObjectProtocol for StreamReaderGroup {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("StreamReaderGroup({})", self.to_str()))
     }

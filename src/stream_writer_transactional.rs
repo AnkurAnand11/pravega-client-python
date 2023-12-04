@@ -14,6 +14,7 @@ cfg_if! {
         use pyo3::exceptions;
         use pyo3::prelude::*;
         use pyo3::PyResult;
+        use pyo3::PyObjectProtocol;
         use crate::transaction::StreamTransaction;
         use pravega_client_shared::TxId;
         use pravega_client_shared::ScopedStream;
@@ -80,8 +81,8 @@ impl StreamTxnWriter {
 /// representation of an Python object.
 ///
 #[cfg(feature = "python_binding")]
-#[pymethods]
-impl StreamTxnWriter {
+#[pyproto]
+impl PyObjectProtocol for StreamTxnWriter {
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("StreamTxnWriter({})", self.to_str()))
     }
