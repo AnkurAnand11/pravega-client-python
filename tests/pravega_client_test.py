@@ -98,7 +98,7 @@ class PravegaTest(unittest.TestCase):
                         for i in range(10))
         print("Creating a Stream Manager, ensure Pravega is running")
         stream_manager=pravega_client.StreamManager("tcp://127.0.0.1:9090", False, False)
-
+        print(repr(stream_manager))
         print("Creating a scope")
         scope_result=stream_manager.create_scope(scope)
         self.assertEqual(True, scope_result, "Scope creation status")
@@ -148,6 +148,7 @@ class PravegaTest(unittest.TestCase):
         # write and read data.
         print("Creating a writer for Stream")
         bs=stream_manager.create_byte_stream(scope,"testStream")
+        print(repr(bs))
         self.assertEqual(15, bs.write(b"bytesfortesting"))
         self.assertEqual(15, bs.write(b"bytesfortesting"))
         self.assertEqual(15, bs.write(b"bytesfortesting"))
@@ -206,7 +207,9 @@ class PravegaTest(unittest.TestCase):
 
         print("Creating a txn writer for Stream")
         w1=stream_manager.create_transaction_writer(scope,"testTxn", 1)
+        print(repr(w1))
         txn1 = w1.begin_txn()
+        print(repr(txn1))
         txn1_id = txn1.get_txn_id()
         print("Write events")
         txn1.write_event("test event1")
