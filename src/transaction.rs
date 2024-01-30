@@ -15,8 +15,8 @@ cfg_if! {
         use pyo3::prelude::*;
         use pyo3::PyResult;
         use crate::TxnFailedException;
-        use pyo3::PyObjectProtocol;
         use pravega_client_shared::{Timestamp, TransactionStatus, TxId};
+        use pyo3::PyObjectProtocol;
         use tracing::{trace, info, warn};
         use std::time::Duration;
         use tokio::time::timeout;

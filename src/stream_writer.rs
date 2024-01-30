@@ -16,12 +16,12 @@ cfg_if! {
         use pyo3::exceptions;
         use pyo3::prelude::*;
         use pyo3::PyResult;
+        use pyo3::PyObjectProtocol;
         use tracing::trace;
         use tracing::info;
         use std::time::Duration;
         use std::sync::Arc;
         use tokio::runtime::Handle;
-        use pyo3::PyObjectProtocol;
         use tokio::time::timeout;
         use tokio::sync::Mutex;
         use tokio::sync::oneshot;

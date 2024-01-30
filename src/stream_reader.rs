@@ -15,13 +15,13 @@ cfg_if! {
         use pravega_client_shared::ScopedStream;
         use pyo3::prelude::*;
         use pyo3::PyResult;
-        use pyo3::exceptions;
         use pyo3::PyObjectProtocol;
+        use pyo3::exceptions;
         use tracing::info;
         use std::sync::Arc;
         use pravega_client::event::reader::{Event, SegmentSlice};
-        use tokio::sync::Mutex;
         use pyo3::PyIterProtocol;
+        use tokio::sync::Mutex;
         use tokio::runtime::Handle;
     }
 }

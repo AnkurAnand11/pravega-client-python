@@ -14,8 +14,8 @@ cfg_if! {
         use pravega_client::event::reader_group::ReaderGroup;
         use pyo3::prelude::*;
         use pyo3::PyResult;
-        use tracing::{info, error};
         use pyo3::PyObjectProtocol;
+        use tracing::{info, error};
         use std::sync::Arc;
         use tokio::sync::Mutex;
         use tokio::runtime::Handle;
