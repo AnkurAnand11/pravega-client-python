@@ -85,8 +85,7 @@ class PravegaReaderTest(aiounittest.AsyncTestCase):
         w1.write_event("test event")
         w1.flush()
         # Create a reader Group Configuration to read from Tail of stream.
-        rg_config = pravega_client.StreamReaderGroupConfig(True, scope, stream)
-        reader_group=stream_manager.create_reader_group_with_config("rg" + suffix, scope, rg_config)
+        reader_group = stream_manager.create_reader_group("rg" + suffix, scope, stream, True)
         r1 = reader_group.create_reader("reader-1")
         print(repr(r1))
         w1.write_event("test event at Tail")
