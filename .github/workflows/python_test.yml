@@ -1,4 +1,4 @@
-name: pythontest
+name: CI
 
 on:
   # Trigger the workflow on push or pull request,
@@ -9,8 +9,8 @@ on:
   pull_request:
 
 jobs:
-  test_tox:
-    name: run-tox
+  build:
+    name: run-test
     runs-on: ubuntu-20.04
     timeout-minutes: 25
     steps:
