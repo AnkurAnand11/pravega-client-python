@@ -249,10 +249,7 @@ impl StreamManager {
         tags: Option<Vec<String>>,
     ) -> PyResult<bool> {
         let handle = self.cf.runtime_handle();
-        info!(
-            "creating stream {:?} under scope {:?} with scaling policy {:?}, retention policy {:?} and tags {:?}",
-            stream_name, scope_name, scaling_policy.scaling, retention_policy.retention, tags
-        );
+        info!("creating stream {:?} under scope {:?} with scaling policy {:?}, retention policy {:?} and tags {:?}", stream_name, scope_name, scaling_policy.scaling, retention_policy.retention, tags);
         let stream_cfg = StreamConfiguration {
             scoped_stream: ScopedStream {
                 scope: Scope::from(scope_name.to_string()),
@@ -311,10 +308,7 @@ impl StreamManager {
         tags: Option<Vec<String>>,
     ) -> PyResult<bool> {
         let handle = self.cf.runtime_handle();
-        info!(
-            "updating stream {:?} under scope {:?} with scaling policy {:?}, retention policy {:?} and tags {:?}",
-            stream_name, scope_name, scaling_policy.scaling, retention_policy.retention, tags
-        );
+        info!("updating stream {:?} under scope {:?} with scaling policy {:?}, retention policy {:?} and tags {:?}", stream_name, scope_name, scaling_policy.scaling, retention_policy.retention, tags);
         let stream_cfg = StreamConfiguration {
             scoped_stream: ScopedStream {
                 scope: Scope::from(scope_name.to_string()),
