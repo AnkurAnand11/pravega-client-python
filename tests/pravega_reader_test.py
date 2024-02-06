@@ -62,6 +62,7 @@ class PravegaReaderTest(aiounittest.AsyncTestCase):
         self.assertEqual(count, 2, "Two events are expected")
         reader_group.reader_offline("reader-1")
         reader_group.reader_offline("reader-1")
+
         stream_manager.delete_reader_group("rg" + suffix, scope)
 
     async def test_ReadfromTail(self):
@@ -88,6 +89,7 @@ class PravegaReaderTest(aiounittest.AsyncTestCase):
         # Create a reader Group Configuration to read from Tail of stream.
         rg_config = pravega_client.StreamReaderGroupConfig(True, scope, stream)
         reader_group=stream_manager.create_reader_group_with_config("rg" + suffix, scope, rg_config)
+
         r1 = reader_group.create_reader("reader-1")
         print(repr(r1))
         w1.write_event("test event at Tail")
